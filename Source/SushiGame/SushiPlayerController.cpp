@@ -3,3 +3,13 @@
 
 #include "SushiPlayerController.h"
 
+AActor* ASushiPlayerController::TapFocusable(FVector2D _vTapLocation)
+{
+	FVector vWorldPosition;
+	FVector vWorldDirection;
+	UGameplayStatics::DeprojectScreenToWorld(this,_vTapLocation, vWorldPosition, vWorldDirection);
+	FHitResult Hit;
+	GetWorld()->LineTraceSingleByChannel(Hit, vWorldPosition, vWorldPosition + (vWorldDirection * 2000), ECollisionChannel::ECC_GameTraceChannel1);
+
+	return Hit.Actor.Get();
+}
