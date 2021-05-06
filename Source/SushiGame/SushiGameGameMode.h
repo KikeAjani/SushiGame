@@ -16,6 +16,10 @@ class SUSHIGAME_API ASushiGameGameMode : public AGameMode
 
 		ASushiGameGameMode(const FObjectInitializer& ObjectInitializer);
 
+
 	virtual void PostLogin(APlayerController* NewPlayer) override;
+
+private:
+	int NumPlayers;
 
 };

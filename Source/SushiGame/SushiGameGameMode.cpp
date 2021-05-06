@@ -15,7 +15,7 @@ void ASushiGameGameMode::PostLogin(APlayerController* NewPlayer)
 {
 	Super::PostLogin(NewPlayer);
 	if (GetLocalRole() == ROLE_Authority){
-	
+		NumPlayers++;
 	}
 }
 
