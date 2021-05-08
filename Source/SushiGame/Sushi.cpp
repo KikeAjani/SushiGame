@@ -8,11 +8,12 @@ ASushi::ASushi()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-
+	/*
 	USceneComponent* RootSceneComponent = CreateDefaultSubobject<USceneComponent>(TEXT("RootScene"));
-	RootComponent = RootSceneComponent;
+	RootComponent = RootSceneComponent;*/
 	SushiMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("MeshComponent"));
-
+	
+	SushiMesh->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
 	//RootComponent = SushiMesh;
 }
 

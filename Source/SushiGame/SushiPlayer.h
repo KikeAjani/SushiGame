@@ -1,7 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
-
+#include "Sushi.h"
 #include "CoreMinimal.h"
 #include "GameFramework/Pawn.h"
 #include "SushiPlayer.generated.h"
@@ -16,10 +16,10 @@ public:
 	// Sets default values for this pawn's properties
 	ASushiPlayer();
 
+
+
 private:
 
-	UPROPERTY(VisibleAnywhere)
-		TArray<ASushi*> Plate;
 
 
 	int Points;

@@ -28,8 +28,10 @@ class SUSHIGAME_API ASushiGameStateBase : public AGameStateBase
 {
 	GENERATED_BODY()
 
-		TArray<FHand*> Hands;
-
+	TArray<FHand*> Hands;
+public:
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	TArray<FHand> Plates;
 	UFUNCTION()
 		void CalculatePoints();
 	

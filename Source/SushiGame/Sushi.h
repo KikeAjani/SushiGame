@@ -6,11 +6,20 @@
 #include "GameFramework/Actor.h"
 #include "Sushi.generated.h"
 
-UENUM()
+UENUM(BlueprintType)
 enum class SushiType: uint8
 {
 	MAKI,
-	NIGIRI
+	NIGIRI_SALMON,
+	NIGIRI_SQUID,
+	NIGIRI_EGG,
+	SASHIMI,
+	TEMPURA,
+	WASABI,
+	CHOPSTICKS,
+	DUMPLING,
+	PUDDING,
+	NONE,
 };
 
 UCLASS()
@@ -22,7 +31,7 @@ public:
 	// Sets default values for this actor's properties
 	ASushi();
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		UStaticMeshComponent* SushiMesh;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
