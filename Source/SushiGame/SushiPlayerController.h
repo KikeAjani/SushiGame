@@ -20,11 +20,9 @@ public:
 		AActor* TapFocusable(FVector2D _vTapLocation);
 
 	UFUNCTION(NetMulticast, Reliable)
-	//UFUNCTION(BlueprintImplementableEvent)
 		void StartTurn();
 
 	UFUNCTION(NetMulticast, Reliable)
-	//UFUNCTION(BlueprintImplementableEvent)
 		void FinishTurn();
 
 	UFUNCTION(BlueprintImplementableEvent)
