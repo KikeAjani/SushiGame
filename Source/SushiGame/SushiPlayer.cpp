@@ -1,25 +1,26 @@
 
-// Fill out your copyright notice in the Description page of Project Settings.
-
-
 #include "SushiPlayer.h"
+#include "Net/UnrealNetwork.h"
 
-// Sets default values
+
+void ASushiPlayer::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
+{
+	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
+	DOREPLIFETIME(ASushiPlayer, PlayerID);
+}
+
 ASushiPlayer::ASushiPlayer()
 {
- 	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
 }
 
-// Called when the game starts or when spawned
 void ASushiPlayer::BeginPlay()
 {
 	Super::BeginPlay();
 	
 }
 
-// Called every frame
 void ASushiPlayer::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
@@ -32,4 +33,3 @@ void ASushiPlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
 }
-

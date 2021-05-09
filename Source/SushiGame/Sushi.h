@@ -9,6 +9,7 @@
 UENUM(BlueprintType)
 enum class SushiType: uint8
 {
+	NONE,
 	MAKI,
 	NIGIRI_SALMON,
 	NIGIRI_SQUID,
@@ -19,7 +20,6 @@ enum class SushiType: uint8
 	CHOPSTICKS,
 	DUMPLING,
 	PUDDING,
-	NONE,
 };
 
 UCLASS()
@@ -28,20 +28,12 @@ class SUSHIGAME_API ASushi : public AActor
 	GENERATED_BODY()
 
 public:
-	// Sets default values for this actor's properties
 	ASushi();
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		UStaticMeshComponent* SushiMesh;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-		SushiType Type;
-protected:
-	// Called when the game starts or when spawned
-	virtual void BeginPlay() override;
-
-public:
-	// Called every frame
-	virtual void Tick(float DeltaTime) override;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Replicated)
+		SushiType Type = SushiType::NONE;
 
 };

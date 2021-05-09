@@ -4,35 +4,30 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/GameStateBase.h"
+#include "Sushi.h"
 #include "SushiGameStateBase.generated.h"
 
-/**
- * 
- */
+class ASushiList;
 
-
-class ASushi;
-class ASushiPlayer;
-USTRUCT()
-struct FHand
-{
-	GENERATED_USTRUCT_BODY()
-
-		// Item class to spawn
-		UPROPERTY()
-		TArray<ASushi*> Sushis;
-};
 
 UCLASS()
 class SUSHIGAME_API ASushiGameStateBase : public AGameStateBase
 {
 	GENERATED_BODY()
 
-	TArray<FHand*> Hands;
+protected:
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		TArray<ASushiList*> Hands;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		TArray<ASushiList*> Plates;
+
 public:
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
-	TArray<FHand> Plates;
-	UFUNCTION()
-		void CalculatePoints();
-	
+	ASushiGameStateBase();
+
+	UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
+		void AddToHand(int _PlayerID, SushiType Sushi);
+
+	UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
+		void AddToPlate(int _PlayerID, SushiType Sushi);
 };
