@@ -9,11 +9,20 @@
 
 class ASushiList;
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FTurnStartedDelegate);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FTurnFinishedDelegate);
+
 
 UCLASS()
 class SUSHIGAME_API ASushiGameStateBase : public AGameStateBase
 {
 	GENERATED_BODY()
+
+public:
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+		FTurnStartedDelegate TurnStartedDelegate;
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+		FTurnFinishedDelegate TurnFinishedDelegate;
 
 protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
@@ -30,4 +39,5 @@ public:
 
 	UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
 		void AddToPlate(int _PlayerID, SushiType Sushi);
+
 };

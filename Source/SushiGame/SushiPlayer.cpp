@@ -18,7 +18,7 @@ ASushiPlayer::ASushiPlayer()
 void ASushiPlayer::BeginPlay()
 {
 	Super::BeginPlay();
-	
+
 }
 
 void ASushiPlayer::Tick(float DeltaTime)

@@ -21,6 +21,9 @@ private:
 	UPROPERTY()
 		TArray<SushiType> SushisToDeal;
 
+	float TurnTime = 5.f;
+	float TimeBetweenTurns = 2.f;
+
 public:
 	UFUNCTION(BlueprintCallable, Server, Reliable)
 		void InitSushiGame();
@@ -35,4 +38,8 @@ private:
 
 	int NumOfSushisForPlayer();
 
+	UFUNCTION(Server, Reliable)
+		void StartTurn();
+	UFUNCTION(Server, Reliable)
+		void FinishTurn();
 };

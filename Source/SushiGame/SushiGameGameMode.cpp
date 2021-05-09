@@ -70,6 +70,48 @@ void ASushiGameGameMode::InitSushiGame_Implementation()
 				}
 			}
 		}
+
+		// Start game
+		FTimerHandle TurnTimer;
+		GetWorld()->GetTimerManager().SetTimer(TurnTimer, this, &ASushiGameGameMode::FinishTurn, TimeBetweenTurns, false);
+	}
+}
+
+void ASushiGameGameMode::StartTurn_Implementation()
+{
+	ASushiGameStateBase* SushiGameState = Cast<ASushiGameStateBase>(GetWorld()->GetGameState());
+	if ((GetLocalRole() == ROLE_Authority) && SushiGameState)
+	{
+		for (int i = 0; i < NumSushiPlayers; ++i)
+		{
+			ASushiPlayerController* SushiPlayerController = Cast<ASushiPlayerController>(UGameplayStatics::GetPlayerController(GetWorld(), i));
+			if (SushiPlayerController)
+			{
+				SushiPlayerController->StartTurn();
+			}
+		}
+
+		FTimerHandle TurnTimer;
+		GetWorld()->GetTimerManager().SetTimer(TurnTimer, this, &ASushiGameGameMode::FinishTurn, TurnTime, false);
+	}
+}
+
+void ASushiGameGameMode::FinishTurn_Implementation()
+{
+	ASushiGameStateBase* SushiGameState = Cast<ASushiGameStateBase>(GetWorld()->GetGameState());
+	if ((GetLocalRole() == ROLE_Authority) && SushiGameState)
+	{
+		for (int i = 0; i < NumSushiPlayers; ++i)
+		{
+			ASushiPlayerController* SushiPlayerController = Cast<ASushiPlayerController>(UGameplayStatics::GetPlayerController(GetWorld(), i));
+			if (SushiPlayerController)
+			{
+				SushiPlayerController->FinishTurn();
+			}
+		}
+
+		FTimerHandle TurnTimer;
+		GetWorld()->GetTimerManager().SetTimer(TurnTimer, this, &ASushiGameGameMode::StartTurn, TimeBetweenTurns, false);
 	}
 }
 
