@@ -17,6 +17,9 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Replicated)
 		uint8 PlayerID;
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+		TMap<SushiType, UStaticMesh*> MeshesByType;
+
 public:
 	ASushiPlayer();
 
