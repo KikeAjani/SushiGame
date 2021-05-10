@@ -2,19 +2,12 @@
 
 
 #include "SushiPlayerController.h"
-#include "SushiGameStateBase.h"
 
 
 void ASushiPlayerController::BeginPlay()
 {
 	Super::BeginPlay();
 
-	ASushiGameStateBase* SushiGameState = Cast<ASushiGameStateBase>(GetWorld()->GetGameState());
-	if (SushiGameState)
-	{
-		SushiGameState->TurnStartedDelegate.AddDynamic(this, &ASushiPlayerController::StartTurn);
-		SushiGameState->TurnFinishedDelegate.AddDynamic(this, &ASushiPlayerController::FinishTurn);
-	}
 }
 
 AActor* ASushiPlayerController::TapFocusable(FVector2D _vTapLocation)
