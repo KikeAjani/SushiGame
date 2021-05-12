@@ -94,7 +94,7 @@ private:
 
 
 	TArray<SushiType> FillGameDeck(const FConfigSushis& _configSushis);
-	void FillApetizersGameDeck(TArray<SushiType>& _deck, Apetizer apetizer);
+	void FillAppetizersGameDeck(TArray<SushiType>& _deck, Apetizer apetizer);
 	void FillSpecialsGameDeck(TArray<SushiType>& _deck, Special special);
 	void FillFruitsGameDeck(TArray<SushiType>& _deck, int NumDesserts);
 };

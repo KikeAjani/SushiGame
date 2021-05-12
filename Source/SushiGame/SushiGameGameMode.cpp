@@ -65,29 +65,6 @@ void ASushiGameGameMode::InitMapNumCardsByType()
 	NumCardsByType.Add(SushiType::FRUIT_WO, 3);
 	NumCardsByType.Add(SushiType::FRUIT_WP, 3);
 	NumCardsByType.Add(SushiType::FRUIT_WW, 2);
-
-
-
-}
-
-void ASushiGameGameMode::PostLogin(APlayerController* NewPlayer)
-{
-	Super::PostLogin(NewPlayer);
-
-	if (GetLocalRole() == ROLE_Authority)
-	{
-		ASushiPlayer* SushiPlayer = Cast<ASushiPlayer>(NewPlayer->GetPawn());
-		if (SushiPlayer)
-		{
-			SushiPlayer->PlayerID = NumSushiPlayers;
-		}
-		NumSushiPlayers++;
-	}
-}
-
-int ASushiGameGameMode::NumOfSushisForPlayer()
-{
-	return 10; //TODO
 }
 
 TArray<SushiType> ASushiGameGameMode::FillGameDeck(const FConfigSushis& _configSushis)
@@ -126,7 +103,6 @@ TArray<SushiType> ASushiGameGameMode::FillGameDeck(const FConfigSushis& _configS
 			deck.Add(SushiType::MAKI_3);
 		}
 	};  break;
-	//TODO
 	case Roll::TEMAKI:
 	{
 		for (int i = 0; i < (*NumCardsByType.Find(SushiType::TEMAKI)); i++)
@@ -134,7 +110,6 @@ TArray<SushiType> ASushiGameGameMode::FillGameDeck(const FConfigSushis& _configS
 			deck.Add(SushiType::TEMAKI);
 		}
 	};  break;
-
 	case Roll::URAMAKI:
 	{
 		for (int i = 0; i < (*NumCardsByType.Find(SushiType::URAMAKI_3)); i++)
@@ -152,10 +127,10 @@ TArray<SushiType> ASushiGameGameMode::FillGameDeck(const FConfigSushis& _configS
 	};  break;
 	}
 
-	//APETIZERS
-	FillApetizersGameDeck(deck, _configSushis.apetizer1);
-	FillApetizersGameDeck(deck, _configSushis.apetizer2);
-	FillApetizersGameDeck(deck, _configSushis.apetizer3);
+	//APPETIZERS
+	FillAppetizersGameDeck(deck, _configSushis.apetizer1);
+	FillAppetizersGameDeck(deck, _configSushis.apetizer2);
+	FillAppetizersGameDeck(deck, _configSushis.apetizer3);
 
 	//SPECIALS
 	FillSpecialsGameDeck(deck, _configSushis.special1);
@@ -329,7 +304,7 @@ void ASushiGameGameMode::FillSpecialsGameDeck(TArray<SushiType>& _deck, Special 
 }
 
 
-void ASushiGameGameMode::FillApetizersGameDeck(TArray<SushiType>& _deck, Apetizer apetizer)
+void ASushiGameGameMode::FillAppetizersGameDeck(TArray<SushiType>& _deck, Apetizer apetizer)
 {
 	switch (apetizer)
 	{
@@ -412,6 +387,29 @@ void ASushiGameGameMode::FillApetizersGameDeck(TArray<SushiType>& _deck, Apetize
 		}
 	} break;
 	}
+}
+
+void ASushiGameGameMode::PostLogin(APlayerController* NewPlayer)
+{
+	Super::PostLogin(NewPlayer);
+
+	if (GetLocalRole() == ROLE_Authority)
+	{
+		ASushiPlayer* SushiPlayer = Cast<ASushiPlayer>(NewPlayer->GetPawn());
+		if (SushiPlayer)
+		{
+			SushiPlayer->PlayerID = NumSushiPlayers;
+		}
+		NumSushiPlayers++;
+	}
+}
+
+int ASushiGameGameMode::NumOfSushisForPlayer()
+{
+	if (NumSushiPlayers <= 3) {	return 10; }
+	if (NumSushiPlayers <= 5) {	return 9; }
+	if (NumSushiPlayers <= 7) {	return 8; }
+	return 7;
 }
 
 void ASushiGameGameMode::InitSushiGame_Implementation()
