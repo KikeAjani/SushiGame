@@ -15,6 +15,8 @@ void ASushiPlayerController::BeginPlay()
 
 void ASushiPlayerController::SetupInputComponent()
 {
+	Super::SetupInputComponent();
+
 	InputComponent->BindTouch(IE_Pressed, this, &ASushiPlayerController::Touched);
 }
 

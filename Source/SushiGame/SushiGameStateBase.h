@@ -28,6 +28,9 @@ protected:
 
 public:
 	ASushiGameStateBase();
+	
+	UFUNCTION(NetMulticast,Reliable)
+	void Init(int NumPlayers);
 
 	UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
 	void AddToHand(int PlayerID, SushiType Sushi);

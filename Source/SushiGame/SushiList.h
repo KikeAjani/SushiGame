@@ -9,7 +9,7 @@
 
 
 UCLASS()
-class SUSHIGAME_API ASushiList : public AActor
+class SUSHIGAME_API ASushiList : public AActor  //Esto era AActor porque hay que replicarlo (Nacho)
 {
 	GENERATED_BODY()
 

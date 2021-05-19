@@ -23,7 +23,8 @@ ASushiGameGameMode::ASushiGameGameMode(const FObjectInitializer& ObjectInitializ
 void ASushiGameGameMode::BeginPlay()
 {
 	Super::BeginPlay();
-	InitMapNumCardsByType();	
+	InitMapNumCardsByType();
+	
 }
 
 void ASushiGameGameMode::InitMapNumCardsByType()
@@ -417,6 +418,9 @@ void ASushiGameGameMode::InitSushiGame_Implementation()
 	ASushiGameStateBase* SushiGameState = Cast<ASushiGameStateBase>(GetWorld()->GetGameState());
 	if ((GetLocalRole() == ROLE_Authority) && SushiGameState)
 	{
+		//Init GameState
+		SushiGameState->Init(NumSushiPlayers);
+		
 		// Init empty Plates
 		for (int i = 0; i < NumSushiPlayers; ++i)
 		{
