@@ -32,4 +32,7 @@ public:
 
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
+	UFUNCTION()
+	void PickSushi(ASushi* Sushi);
+	
 };

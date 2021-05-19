@@ -18,18 +18,27 @@ class SUSHIGAME_API ASushiGameStateBase : public AGameStateBase
 
 protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-		TArray<ASushiList*> Hands;
+	TArray<ASushiList*> Hands;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-		TArray<ASushiList*> Plates;
+	TArray<ASushiList*> Plates;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	TArray<ASushiList*> Changes;
 
 public:
 	ASushiGameStateBase();
 
 	UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
-		void AddToHand(int _PlayerID, SushiType Sushi);
+	void AddToHand(int PlayerID, SushiType Sushi);
 
 	UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
-		void AddToPlate(int _PlayerID, SushiType Sushi);
+	void AddToPlate(int PlayerID, SushiType Sushi);
+	
+	UFUNCTION(BlueprintCallable)
+	void HandToPlate(int PlayerID, ASushi* Sushi);
+	
+	UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
+	void UpdateChanges();
 
 };

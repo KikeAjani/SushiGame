@@ -1,5 +1,8 @@
 
 #include "SushiPlayer.h"
+
+#include "SushiGameStateBase.h"
+#include "Kismet/GameplayStatics.h"
 #include "Net/UnrealNetwork.h"
 
 
@@ -32,4 +35,13 @@ void ASushiPlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
+}
+
+void ASushiPlayer::PickSushi(ASushi* Sushi)
+{
+	ASushiGameStateBase* GameState = Cast<ASushiGameStateBase>(UGameplayStatics::GetGameState(GetWorld()));
+	if (GameState)
+	{
+		GameState->HandToPlate(PlayerID, Sushi);
+	}
 }

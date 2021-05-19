@@ -2,7 +2,6 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Kismet/GameplayStatics.h"
 #include "GameFramework/PlayerController.h"
 #include "SushiPlayerController.generated.h"
 
@@ -17,7 +16,9 @@ protected:
 
 public:
 	UFUNCTION(BlueprintCallable)
-		AActor* TapFocusable(FVector2D _vTapLocation);
+		void Touched(ETouchIndex::Type FingerIndex, FVector Location);
+	UFUNCTION(BlueprintCallable)
+		void PickSushi(FVector2D _vTapLocation);
 
 	UFUNCTION(NetMulticast, Reliable)
 		void StartTurn();
@@ -30,4 +31,8 @@ public:
 
 	UFUNCTION(BlueprintImplementableEvent)
 		void FinishTurnBP();
+	
+protected:
+	virtual void SetupInputComponent() override;
+	
 };

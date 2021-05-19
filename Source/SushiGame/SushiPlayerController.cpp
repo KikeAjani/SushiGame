@@ -3,6 +3,9 @@
 
 #include "SushiPlayerController.h"
 
+#include "SushiPlayer.h"
+#include "Kismet/GameplayStatics.h"
+
 
 void ASushiPlayerController::BeginPlay()
 {
@@ -10,7 +13,20 @@ void ASushiPlayerController::BeginPlay()
 
 }
 
-AActor* ASushiPlayerController::TapFocusable(FVector2D _vTapLocation)
+void ASushiPlayerController::SetupInputComponent()
+{
+	InputComponent->BindTouch(IE_Pressed, this, &ASushiPlayerController::Touched);
+}
+
+void ASushiPlayerController::Touched(ETouchIndex::Type FingerIndex, FVector Location)
+{
+	if (FingerIndex == ETouchIndex::Touch1)
+	{
+		PickSushi(FVector2D(Location.X, Location.Y));
+	}
+}
+
+void ASushiPlayerController::PickSushi(FVector2D _vTapLocation)
 {
 	FVector vWorldPosition;
 	FVector vWorldDirection;
@@ -18,7 +34,12 @@ AActor* ASushiPlayerController::TapFocusable(FVector2D _vTapLocation)
 	FHitResult Hit;
 	GetWorld()->LineTraceSingleByChannel(Hit, vWorldPosition, vWorldPosition + (vWorldDirection * 2000), ECollisionChannel::ECC_GameTraceChannel1);
 
-	return Hit.Actor.Get();
+	ASushiPlayer* SushiPlayer = Cast<ASushiPlayer>(GetPawn());
+	ASushi* Sushi = Cast<ASushi>(Hit.Actor.Get());
+	if (SushiPlayer && Sushi)
+	{
+		SushiPlayer->PickSushi(Sushi);
+	}
 }
 
 void ASushiPlayerController::StartTurn_Implementation()
