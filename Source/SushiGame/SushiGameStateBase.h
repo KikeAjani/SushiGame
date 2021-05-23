@@ -44,4 +44,7 @@ public:
 	UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
 	void UpdateChanges();
 
+	UFUNCTION(BlueprintCallable,NetMulticast, Reliable)
+	void SwapHands();
+
 };

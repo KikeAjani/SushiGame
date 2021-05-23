@@ -43,6 +43,23 @@ void ASushiGameStateBase::AddToPlate_Implementation(int PlayerID, SushiType Sush
 
 void ASushiGameStateBase::HandToPlate(int PlayerID, ASushi* Sushi)
 {
+	if(!Sushi)
+	{
+		for(int i = 0; i< Hands[PlayerID]->Sushis.Num(); i++)
+		{
+			if(Hands[PlayerID]->Sushis[i]->Type != SushiType::NONE)
+			{
+				Sushi = Hands[PlayerID]->Sushis[i];
+				break;
+			}
+		}
+	}
+
+	if(!Sushi)
+	{
+		return;
+	}
+	
 	int index = -1;
 	for(int i = 0; i< Plates[PlayerID]->Sushis.Num(); i++)
 	{
@@ -73,6 +90,18 @@ void ASushiGameStateBase::HandToPlate(int PlayerID, ASushi* Sushi)
 		Hands[PlayerID]->Sushis[index]->Type = SushiType::NONE;
 
 	}
+}
+
+void ASushiGameStateBase::SwapHands_Implementation()
+{
+	int NumPlayers = Hands.Num();
+	ASushiList* auxLastList = Hands[NumPlayers-1];
+
+	for(int i = NumPlayers-1; i>0; i--)
+	{
+		Hands[i] = Hands[i-1];
+	}
+	Hands[0] = auxLastList;
 }
 
 void ASushiGameStateBase::UpdateChanges_Implementation()

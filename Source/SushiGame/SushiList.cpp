@@ -11,7 +11,8 @@ void ASushiList::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifeti
 
 ASushiList::ASushiList()
 {
-	SetReplicates(true);
+	bReplicates = true;
+	bAlwaysRelevant = true;
 
 }
 

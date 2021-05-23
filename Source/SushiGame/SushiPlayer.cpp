@@ -21,7 +21,7 @@ ASushiPlayer::ASushiPlayer()
 void ASushiPlayer::BeginPlay()
 {
 	Super::BeginPlay();
-
+	Selection = nullptr;
 }
 
 void ASushiPlayer::Tick(float DeltaTime)
@@ -43,5 +43,6 @@ void ASushiPlayer::PickSushi(ASushi* Sushi)
 	if (GameState)
 	{
 		GameState->HandToPlate(PlayerID, Sushi);
+		Selection = nullptr;
 	}
 }

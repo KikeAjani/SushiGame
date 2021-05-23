@@ -10,6 +10,7 @@
 void ASushiPlayerController::BeginPlay()
 {
 	Super::BeginPlay();
+	bShowMouseCursor = true;
 
 }
 
@@ -40,7 +41,8 @@ void ASushiPlayerController::PickSushi(FVector2D _vTapLocation)
 	ASushi* Sushi = Cast<ASushi>(Hit.Actor.Get());
 	if (SushiPlayer && Sushi)
 	{
-		SushiPlayer->PickSushi(Sushi);
+		//SushiPlayer->PickSushi(Sushi);
+		SushiPlayer->Selection = Sushi;
 	}
 }
 

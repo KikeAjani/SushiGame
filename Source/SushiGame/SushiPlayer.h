@@ -20,7 +20,10 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 		TMap<SushiType, UStaticMesh*> MeshesByType;
 
-public:
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	ASushi* Selection;
+
+	public:
 	ASushiPlayer();
 
 

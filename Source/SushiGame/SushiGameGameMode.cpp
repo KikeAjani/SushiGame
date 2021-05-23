@@ -486,11 +486,15 @@ void ASushiGameGameMode::FinishTurn_Implementation()
 	ASushiGameStateBase* SushiGameState = Cast<ASushiGameStateBase>(GetWorld()->GetGameState());
 	if ((GetLocalRole() == ROLE_Authority) && SushiGameState)
 	{
+		SushiGameState->SwapHands();
 		for (int i = 0; i < NumSushiPlayers; ++i)
 		{
 			ASushiPlayerController* SushiPlayerController = Cast<ASushiPlayerController>(UGameplayStatics::GetPlayerController(GetWorld(), i));
 			if (SushiPlayerController)
 			{
+				ASushiPlayer* SushiPlayer = Cast<ASushiPlayer>(SushiPlayerController->GetPawn());
+				SushiPlayer->PickSushi(SushiPlayer->Selection);
+				
 				SushiPlayerController->FinishTurn();
 			}
 		}

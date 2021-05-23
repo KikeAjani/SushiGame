@@ -11,7 +11,8 @@ void ASushi::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimePr
 
 ASushi::ASushi()
 {
-	SetReplicates(true);
+	//SetReplicates(true);
+	bReplicates = true;
 
 	SushiMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("MeshComponent"));
 	SushiMesh->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
